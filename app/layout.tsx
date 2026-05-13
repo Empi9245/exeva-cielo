@@ -2,6 +2,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata, Viewport } from "next";
 import localFont from 'next/font/local';
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const soriaFont = localFont({
   src: "../public/soria-font.ttf",
@@ -73,6 +74,7 @@ export default function RootLayout({
         {children}
       </body>
       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''}/>
+      <Analytics />
     </html>
   );
 }
