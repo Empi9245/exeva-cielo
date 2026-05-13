@@ -14,7 +14,7 @@ const vercettiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://clevir.li/'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com/'),
   title: "Mohit Virli ✌️",
   description: "A frontend developer by profession, a creative at heart.",
   keywords: "Mohit Virli, Frontend Engineer, React Developer, Three.js, Creative Developer, Web Development, Angular, JavaScript, TypeScript, Portfolio",
@@ -72,7 +72,7 @@ export default function RootLayout({
       >
         {children}
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || 'G-7WD4HM3XRE'}/>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''}/>
     </html>
   );
 }

@@ -28,6 +28,9 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID || '' }}
+      GH_PAGES_CUSTOM_DOMAIN: ${{ secrets.GH_PAGES_CUSTOM_DOMAIN || '' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -61,6 +64,20 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
+      - name: Determine site URL
+        run: |
+          if [ -n "${GH_PAGES_CUSTOM_DOMAIN:-}" ]; then
+            echo "$GH_PAGES_CUSTOM_DOMAIN" > public/CNAME
+            echo "NEXT_PUBLIC_SITE_URL=$GH_PAGES_CUSTOM_DOMAIN" >> $GITHUB_ENV
+          else
+            OWNER=${GITHUB_REPOSITORY_OWNER}
+            REPO=${GITHUB_REPOSITORY#*/}
+            if [ "$REPO" = "$OWNER.github.io" ]; then
+              echo "NEXT_PUBLIC_SITE_URL=https://$OWNER.github.io" >> $GITHUB_ENV
+            else
+              echo "NEXT_PUBLIC_SITE_URL=https://$OWNER.github.io/$REPO" >> $GITHUB_ENV
+            fi
+          fi
       - name: Restore cache
         uses: actions/cache@v4
         with:
@@ -75,9 +92,6 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-        env:
-          NEXT_PUBLIC_SITE_URL: https://clevir.li/
-          NEXT_PUBLIC_GA_ID: G-7WD4HM3XRE
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
