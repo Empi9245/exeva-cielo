@@ -15,14 +15,16 @@ interface ProjectTileProps {
   rotation: [number, number, number];
   activeId: number | null;
   onClick: () => void;
+  datePosition: 'top' | 'bottom';
 }
 
-const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: ProjectTileProps) => {
+const ProjectTile = ({ project, index, position, rotation, activeId, onClick, datePosition }: ProjectTileProps) => {
   const projectRef = useRef<THREE.Group>(null);
   const hoverAnimRef = useRef<gsap.core.Timeline | null>(null);
   const [desktopHovered, setDesktopHovered] = useState(false);
   const isProjectSectionActive = usePortalStore((state) => state.activePortalId === "projects");
   const hovered = isMobile ? activeId === index : desktopHovered;
+  const isTop = datePosition === 'top';
 
   const titleProps = useMemo(() => ({
     font: "./soria-font.ttf",
@@ -45,7 +47,7 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
     hoverAnimRef.current = gsap.timeline();
     hoverAnimRef.current
       .to(projectRef.current.position, { z: hovered ? 1 : 0, duration: 0.2 }, 0)
-      .to(projectRef.current.position, { y: hovered ? 0.4 : 0 }, 0)
+      .to(projectRef.current.position, { y: hovered ? isTop ? -2 : 0 : 0 }, 0)
       .to(projectRef.current.scale, {
         x: hovered ? 1.3 : 1,
         y: hovered ? 1.3 : 1,
@@ -55,7 +57,7 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
       .to(textBox.position, { y: hovered ? 0.7 : 0 }, 0)
       // .to(textBox.scale, { y: hovered ? 1 : 0, x: hovered ? 1 : 0 }, 0)
       .to(textBox, { fillOpacity: hovered ? 1 : 0, duration: 0.4 }, 0)
-      .to(dateGroup.position, { y: hovered ? 2.6 : 1.4 }, 0)
+      .to(dateGroup.position, { y: hovered ? 2.6 : isTop? 1.4 : -1.4  }, 0)
       .to(mesh.scale, { y: hovered ? 2 : 1 }, 0)
       .to((mesh as THREE.Mesh).material, { opacity: hovered ? 0.95 : 0.3 }, 0)
       .to(mesh.position, { y: hovered ? 1 : 0 }, 0);
@@ -70,7 +72,7 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
   useEffect(() => {
     if (projectRef.current) {
       gsap.to(projectRef.current.position, {
-        y: isProjectSectionActive ? 0 : -10,
+        y: isProjectSectionActive ? 0 : -11,
         duration: 1,
         delay: isProjectSectionActive ? index * 0.1 : 0,
       });
@@ -86,12 +88,19 @@ const ProjectTile = ({ project, index, position, rotation, activeId, onClick }: 
     setTimeout(() => window.open(project.url, '_blank'), 50);
   };
 
+  const handlePointerOver = (e: ThreeEvent<MouseEvent>) => {
+    e.stopPropagation();
+    if (!isMobile && isProjectSectionActive) {
+      setDesktopHovered(true);
+    }
+  };
+
   return (
     <group
       position={position}
       rotation={rotation}
       onClick={onClick}
-      onPointerOver={() => !isMobile && isProjectSectionActive && setDesktopHovered(true)}
+      onPointerOver={handlePointerOver}
       onPointerOut={() => !isMobile && isProjectSectionActive && setDesktopHovered(false)}>
       <group ref={projectRef}>
         <mesh>

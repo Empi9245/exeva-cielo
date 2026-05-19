@@ -56,4 +56,34 @@ export const PROJECTS: Project[] = [
     subtext: 'Developed a minimalist clock featuring a time-remaining indicator.',
     url: 'https://github.com/mohitvirli/focus-clock',
   },
+  {
+    title: 'Slide Sync',
+    date: 'Oct 2025',
+    subtext: 'A presentation synchronization tool enabling remote slide control and real-time syncing across multiple devices.',
+    url: 'https://github.com/mohitvirli/slide-sync',
+  },
+  {
+    title: 'Login Page',
+    date: 'Oct 2025',
+    subtext: 'An experimental authentication UI exploring modern layouts, animations and frontend interaction patterns.',
+    url: 'https://github.com/mohitvirli/login-page',
+  },
+  {
+    title: 'Reso',
+    date: 'May 2026',
+    subtext: 'A personal music player and visualizer.',
+    url: 'https://reso.clevir.li',
+  },
+  {
+    title: 'Labs',
+    date: 'May 2026',
+    subtext: 'My experiments.',
+    url: 'https://labs.clevir.li',
+  },
+  {
+    title: 'Todoist Graph',
+    date: 'May 2026',
+    subtext: 'A GitHub-style productivity heatmap for Todoist built with Electron, visualizing completed tasks over time.',
+    url: 'https://labs.clevir.li/todoist-graph',
+  },
 ];

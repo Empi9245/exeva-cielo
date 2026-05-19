@@ -33,8 +33,8 @@ export const WORK_TIMELINE: WorkTimelinePoint[] = [
   {
     point: new THREE.Vector3(1, 1, -12),
     year: new Date().toLocaleDateString('default', { year: 'numeric' }),
-    title: '?',
-    subtitle: '???',
+    title: 'Living...',
+    subtitle: '↓ 288K tokens',
     position: 'right',
   }
 ]
