@@ -20,7 +20,6 @@ const Hero = () => {
       gsap.fromTo(titleRef.current.position, {
         y: -10,
         duration: 1,
-        // delay: 1.5,
       }, {
         y: 0,
         duration: 3
@@ -35,7 +34,7 @@ const Hero = () => {
 
   return (
     <>
-      <Text position={[0, 2, -10]} {...fontProps} ref={titleRef}>Hi, I am Mohit Virli.</Text>
+      <Text position={[0, 2, -10]} {...fontProps} ref={titleRef}>Exeva. Digital Agency.</Text>
       <StarsContainer />
       <CloudContainer/>
       <group position={[0, -25, 5.69]}>

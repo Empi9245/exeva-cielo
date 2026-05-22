@@ -40,7 +40,7 @@ const Experience = () => {
   });
 
   const getTitle = () => {
-    const title = 'experience'.toUpperCase();
+    const title = 'exeva'.toUpperCase();
     return title.split('').map((char, i) => {
       const diff = isMobile ? 0.4 : 0.8;
       return (
@@ -51,24 +51,20 @@ const Experience = () => {
 
   return (
     <group position={[0, -41.5, 12]} rotation={[-Math.PI / 2, 0 ,-Math.PI / 2]}>
-      {/* <mesh receiveShadow position={[-5, 0, 0.1]}>
-        <planeGeometry args={[10, 5, 1]} />
-        <shadowMaterial opacity={0.1} />
-      </mesh> */}
       <group rotation={[0, 0, Math.PI / 2]}>
         <group ref={titleRef} position={[isMobile ? -1.8 : -3.6, 2, -2]}>
           {getTitle()}
         </group>
 
         <group position={[0, -1, 0]} ref={groupRef}>
-          <GridTile title='WORK AND EDUCATION'
+          <GridTile title='SERVIZI'
             id="work"
             color='#b9c6d6'
             textAlign='left'
             position={new THREE.Vector3(isMobile ? -1 : -2, 0, isMobile ? 0.4 : 0)}>
             <Work/>
           </GridTile>
-          <GridTile title='SIDE PROJECTS'
+          <GridTile title='PORTFOLIO'
             id="projects"
             color='#bdd1e3'
             textAlign='right'

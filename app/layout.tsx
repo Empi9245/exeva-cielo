@@ -14,13 +14,13 @@ const vercettiFont = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com/'),
-  title: "Mohit Virli ✌️",
-  description: "A frontend developer by profession, a creative at heart.",
-  keywords: "Mohit Virli, Frontend Engineer, React Developer, Three.js, Creative Developer, Web Development, Angular, JavaScript, TypeScript, Portfolio",
-  authors: [{ name: "Mohit Virli" }],
-  creator: "Mohit Virli",
-  publisher: "Mohit Virli",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://exeva.it/'),
+  title: "Exeva — Digital Agency",
+  description: "Exeva è un'agenzia digitale specializzata in web design, branding, marketing e comunicazione. Trasformiamo idee in esperienze digitali memorabili.",
+  keywords: "Exeva, Digital Agency, Web Design, Branding, Marketing, SEO, UI/UX, Comunicazione, Agenzia Digitale, Roma",
+  authors: [{ name: "Exeva" }],
+  creator: "Exeva",
+  publisher: "Exeva",
   formatDetection: {
     email: false,
     address: false,
@@ -37,19 +37,16 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Mohit Virli - Frontend Engineer",
-    description: "Frontend engineer by profession, creative at heart.",
-    siteName: "Mohit Virli's Portfolio",
-    locale: "en_US",
+    title: "Exeva — Digital Agency",
+    description: "Agenzia digitale specializzata in web design, branding e marketing strategico.",
+    siteName: "Exeva",
+    locale: "it_IT",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohit Virli - Frontend Engineer",
-    description: "Frontend engineer by profession, creative at heart.",
-  },
-  verification: {
-    google: "GsRYY-ivL0F_VKkfs5KAeToliqz0gCrRAJKKmFkAxBA",
+    title: "Exeva — Digital Agency",
+    description: "Agenzia digitale specializzata in web design, branding e marketing strategico.",
   },
 };
 
@@ -66,13 +63,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="overscroll-y-none">
+    <html lang="it" className="overscroll-y-none">
       <body
         className={`${soriaFont.variable} ${vercettiFont.variable} font-sans antialiased`}
       >
         {children}
+        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || ''}/>
     </html>
   );
 }
