@@ -15,7 +15,7 @@ import { ScrollHint } from "./ScrollHint";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 const CanvasLoader = (props: { children: React.ReactNode }) => {
-  const ref= useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const backgroundColor = useThemeStore((state) => state.theme.color);
   const { progress } = useProgress();
@@ -64,22 +64,22 @@ const CanvasLoader = (props: { children: React.ReactNode }) => {
   return (
     <div className="h-[100dvh] wrapper relative">
       <div className="h-[100dvh] relative" ref={ref}>
-        <Canvas className="base-canvas"
+        <Canvas
+          className="base-canvas"
           shadows
           style={canvasStyle}
           ref={canvasRef}
-          dpr={[1, 2]}>
+          dpr={[1, 2]}
+        >
           <Suspense fallback={null}>
             <ambientLight intensity={0.5} />
-
             <ScrollControls pages={4} damping={0.4} maxSpeed={1} distance={1} style={{ zIndex: 1 }}>
               {props.children}
               <Preloader />
             </ScrollControls>
-
             <Preload all />
           </Suspense>
-          <AdaptiveDpr pixelated/>
+          <AdaptiveDpr pixelated />
         </Canvas>
         <ProgressLoader progress={progress} />
       </div>
